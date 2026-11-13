@@ -4,7 +4,7 @@
  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name="theme-color" content="#081725">
  <meta name="description" content="Trajetória — jogo gratuito de carreira no futebol. Crie um jogador, participe de peneiras, treine e viva decisões desde os 13 anos. Beta gratuito para PC e celular.">
- <title>Trajetória — Jogo grátis de carreira no futebol (Beta 0.9.6)</title>
+ <title>Trajetória — Jogo grátis de carreira no futebol (Beta 0.9.7)</title>
  <meta name="robots" content="index,follow">
  <meta property="og:type" content="website">
  <meta property="og:title" content="Trajetória — Sua vida no futebol">
@@ -244,13 +244,28 @@ body{background:radial-gradient(ellipse 75% 40% at 8% -10%,#154a54 0,transparent
 @media(max-width:380px){.portrait096-options{grid-template-columns:repeat(3,minmax(0,1fr));}}
 
 </style>
+<style>
+/* Trajetória 0.9.7 — comentários voluntários e orientação inicial */
+.tr097-intro{background:linear-gradient(120deg,#102c3f,#153c40);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:25px 30px;border-color:#5b988e}
+.tr097-intro h2{font-size:clamp(22px,3vw,33px);line-height:1.15;color:#f2fff8;margin:9px 0}.tr097-intro p{color:#c1dcd9;font-size:13px;line-height:1.55;max-width:700px}
+.tr097-score-icon{font-size:56px;filter:drop-shadow(0 10px 24px #0006)}.tr097-flag{font-size:10px;font-weight:800;letter-spacing:.14em;color:#89f2bb;text-transform:uppercase}
+.tr097-form{margin-top:18px;padding:22px}.tr097-form h3{margin:0 0 15px}.tr097-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tr097-form .field{margin-top:13px}
+.tr097-form textarea{width:100%;resize:vertical;min-height:92px;font:inherit;line-height:1.5;background:#0e2638;color:#f4fff9;padding:12px;border:1px solid #476070;border-radius:9px}
+.tr097-check{display:flex;align-items:flex-start;gap:10px;margin:15px 0;max-width:760px;color:#cde5e4;font-size:13px;line-height:1.5;cursor:pointer}.tr097-check input{width:18px;height:18px;accent-color:#4bdd9c;flex:none;margin-top:2px}
+.tr097-feedback-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.tr097-feedback-actions button{white-space:normal;line-height:1.3}.tr097-honest{margin-top:13px;line-height:1.55}
+.tr097-next{display:flex;align-items:center;justify-content:space-between;gap:18px;border-color:#468f80;background:linear-gradient(130deg,#102e3d,#154139);margin-bottom:15px}.tr097-next h3{margin:6px 0;color:#f3fff8}.tr097-next p{font-size:12px;color:#c6dfd8;margin:4px 0}.tr097-next-buttons{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}.tr097-cover-note{max-width:580px;margin:0 auto 11px;color:#d9eee6;font-size:13px;line-height:1.5}.tr097-cover-feedback{margin:17px auto}
+.tr097-local-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:17px 0}.tr097-local-grid>div{display:flex;flex-direction:column;gap:7px;background:#0b2838;border-radius:9px;padding:12px;text-align:center}.tr097-local-grid strong{font-size:22px;color:#91f3c7}.tr097-local-grid span{font-size:10px;color:#c4d8d9}
+.tr097-public{background:#071725;min-height:100vh;padding-bottom:60px}.tr097-public-header{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:22px max(16px,calc((100% - 1120px)/2));color:#e4f5ee}.tr097-public-main{max-width:1120px;padding:12px 16px;margin:auto}
+@media(max-width:720px){.tr097-next{align-items:flex-start;flex-direction:column}.tr097-next-buttons{justify-content:flex-start}.tr097-row{grid-template-columns:1fr}.tr097-local-grid{grid-template-columns:repeat(2,1fr)}.tr097-intro{padding:19px}.tr097-score-icon{font-size:35px}.tr097-form{padding:15px}}
+
+</style>
 </head>
 <body>
  <div id="app"></div>
  <script>
 /* TRAJETÓRIA • primeira versão jogável (alpha) • sem dependências externas */
 'use strict';
-const APP_VERSION='0.9.5';
+const APP_VERSION='0.9.7';
 const STORAGE='trajetoria_saves_v1';
 const ATTR={
 'Técnicos':['Controle de bola','Primeiro toque','Domínio orientado','Condução','Drible','Finta','Passe curto','Passe longo','Passe de primeira','Lançamento','Cruzamento','Curva/efeito','Finalização','Precisão de chute','Força de chute','Chute de longe','Voleio','Cabeceio','Cobrança de falta','Pênaltis','Escanteios','Proteção da bola','Desarme em pé','Carrinho','Recepções difíceis','Passe em profundidade'],
@@ -6385,5 +6400,93 @@ const TRAJ_PORTRAITS_096=[["data:image/webp;base64,UklGRsQdAABXRUJQVlA4ILgdAAAQi
 
 </script>
  
+<script>
+/* TRAJETÓRIA 0.9.7 — beta público: orientação, feedback voluntário e diagnóstico local.
+ * O site é estático; não existe envio automático nem contagem global de visitantes.
+ * A abertura de uma issue no GitHub é um ato explícito e requer conta GitHub.
+ */
+(()=>{'use strict';
+const RELEASE='0.9.7-beta';
+const DRAFT_KEY='trajetoria-097-feedback-draft';
+const STATS_KEY='trajetoria-097-metricas-locais';
+const CONSENT_KEY='trajetoria-097-metricas-aceitas';
+const REPO='https://github.com/roggerr9/trajetoria';
+const esc=s=>E(String(s??''));
+let lastUrl='',lastTrack='';
+function safeGet(k,defaultVal){try{const v=localStorage.getItem(k);return v===null?defaultVal:v;}catch{return defaultVal;}}
+function safeSet(k,v){try{localStorage.setItem(k,v);return true;}catch{return false;}}
+function stats(){try{const s=JSON.parse(safeGet(STATS_KEY,'{}'));return s&&typeof s==='object'&&!Array.isArray(s)?s:{};}catch{return {};}}
+function consent(){return safeGet(CONSENT_KEY,'no')==='yes';}
+function track(k){if(!consent())return;const st=stats();st[k]=Math.min(1000000,(Number(st[k])||0)+1);safeSet(STATS_KEY,JSON.stringify(st));}
+function draft(){try{const obj=JSON.parse(safeGet(DRAFT_KEY,'{}'));return obj&&typeof obj==='object'&&!Array.isArray(obj)?obj:{};}catch{return {};}}
+function formValues(){return {category:document.getElementById('tr097-kind')?.value||'Sugestão',rating:document.getElementById('tr097-rate')?.value||'',description:document.getElementById('tr097-desc')?.value?.slice(0,2000)||'',steps:document.getElementById('tr097-steps')?.value?.slice(0,1000)||'',details:!!document.getElementById('tr097-details')?.checked};}
+function storeDraft(){safeSet(DRAFT_KEY,JSON.stringify(formValues()));}
+function report(){const f=formValues(),body=f.description.trim();if(body.length<12){toast('Escreva pelo menos 12 caracteres contando sua experiência.');document.getElementById('tr097-desc')?.focus();return null;}
+const txt=[`TRAJETÓRIA — FEEDBACK DO BETA`, `Categoria: ${f.category}`,`Nota geral: ${f.rating||'Não informada'}${f.rating?'/5':''}`,'',`RELATO:`,body];
+if(f.steps.trim())txt.push('','DETALHES / COMO REPRODUZIR:',f.steps.trim());
+if(f.details)txt.push('','CONTEXTO TÉCNICO (autorizado pelo jogador):',`Versão: ${RELEASE}`,`Tela: ${view}`,`Fase: ${S?phase():'sem carreira'}`,`Idade virtual: ${S?age():'—'}`,`Dispositivo: ${window.matchMedia?.('(max-width:700px)').matches?'tela pequena':'tela maior'}`);
+txt.push('','Relato voluntário. Não inclui nome, foto, ID ou conteúdo do salvamento.','Nunca inclua senhas ou dados pessoais em uma issue pública.');
+return {title:`[Beta 0.9.7] ${f.category}: ${body.slice(0,65).replace(/[\n\r]/g,' ')}`,body:txt.join('\n')};}
+function copyString(v){if(navigator.clipboard?.writeText){navigator.clipboard.writeText(v).then(()=>toast('Feedback copiado.')).catch(()=>fallback(v));}else fallback(v);}
+function fallback(v){const e=document.createElement('textarea');e.value=v;e.style.position='fixed';e.style.opacity='0';document.body.appendChild(e);e.select();try{toast(document.execCommand('copy')?'Feedback copiado.':'Selecione e copie seu relato.');}catch{toast('Copie o relato manualmente.');}e.remove();}
+function sendGitHub(){const r=report();if(!r)return;storeDraft();track('links_github_abertos');const q=new URLSearchParams({title:r.title,body:r.body});lastUrl=REPO+'/issues/new?'+q.toString();window.open(lastUrl,'_blank','noopener,noreferrer');toast('A página do GitHub foi aberta. Para enviar, faça login e confirme a publicação da issue.');}
+async function share(){const r=report();if(!r)return;storeDraft();if(navigator.share){try{await navigator.share({title:'Feedback do Trajetória',text:r.body});toast('Compartilhamento aberto. Escolha para quem enviar.');track('compartilhamentos_abertos');return;}catch(e){if(e.name==='AbortError')return;}}copyString(r.body);}
+function feedbackPanel(){const f=draft(),stat=stats();
+ const opts=[['Sugestão','Sugestão de melhoria'],['Bug','Erro ou comportamento inesperado'],['Jogabilidade','Diversão e dificuldade'],['Elogio','Gostei de algo']];
+ return `${pageHead('Trajetória · Beta 0.9.7','Sua opinião melhora o jogo','Conte o que funcionou, o que confundiu você ou o que gostaria de ver na próxima atualização.')}
+ <section class="tr097-intro card"><div><span class="tr097-flag">★ FEEDBACK DOS JOGADORES</span><h2>Ajude a construir o Trajetória</h2><p>Leva cerca de um minuto. Sua mensagem só sai do navegador quando você escolher uma opção de compartilhamento. Não pedimos nome nem e-mail.</p></div><div aria-hidden="true" class="tr097-score-icon">⚽</div></section>
+ <section class="card tr097-form"><h3>Conte sua experiência</h3><div class="tr097-row"><div class="field"><label for="tr097-kind">Sobre o que deseja falar?</label><select id="tr097-kind">${opts.map(([v,t])=>`<option value="${esc(v)}" ${f.category===v?'selected':''}>${esc(t)}</option>`).join('')}</select></div><div class="field"><label for="tr097-rate">Nota para a experiência (opcional)</label><select id="tr097-rate"><option value="">Prefiro não avaliar</option>${[1,2,3,4,5].map(n=>`<option value="${n}" ${String(f.rating)===String(n)?'selected':''}>${n} / 5 ${n===5?'★ Excelente':n===1?'★ Precisa melhorar':''}</option>`).join('')}</select></div></div>
+ <div class="field"><label for="tr097-desc">Sua opinião ou problema *</label><textarea id="tr097-desc" maxlength="2000" placeholder="Ex.: Fiz uma peneira, mas não entendi por que fui reprovado..." rows="5">${esc(f.description||'')}</textarea><p class="field-note">No mínimo 12 caracteres. Não informe senhas, telefones ou dados pessoais.</p></div>
+ <div class="field"><label for="tr097-steps">Como aconteceu? (opcional)</label><textarea id="tr097-steps" maxlength="1000" placeholder="Ex.: Eu estava na aba Partidas e escolhi a segunda opção..." rows="3">${esc(f.steps||'')}</textarea></div>
+ <label class="tr097-check"><input type="checkbox" id="tr097-details" ${f.details?'checked':''}><span>Incluir contexto técnico básico (versão, tela, etapa e idade virtual), sem nome ou dados do salvamento.</span></label>
+ <div class="tr097-feedback-actions"><button class="btn btn-primary" data-action="tr097-github">↗ Publicar no GitHub (requer conta)</button><button class="btn btn-soft" data-action="tr097-share">Compartilhar pelo celular</button><button class="btn btn-soft" data-action="tr097-copy">Copiar opinião</button><button class="btn btn-ghost" data-action="tr097-download">Baixar .txt</button></div><p class="muted small tr097-honest">O GitHub abrirá uma nova página com o relato preenchido. A publicação é pública e só acontece após sua confirmação. Se não tiver GitHub, use Compartilhar, Copiar ou Baixar para enviar a opinião por outro canal. Não existe envio automático para o desenvolvedor.</p></section>
+ <section class="card mt"><div class="panel-title"><h3>Diagnóstico local e privacidade</h3><span class="tag">Não envia dados</span></div><p class="muted small">Opcionalmente, este navegador pode contar apenas ações gerais, como iniciar uma carreira ou jogar uma partida. Os totais ficam exclusivamente no próprio navegador e ajudam a montar um relatório para o desenvolvedor, caso você decida compartilhá-lo.</p><label class="tr097-check"><input type="checkbox" id="tr097-consent" ${consent()?'checked':''}><span>Permitir contagem local de ações de uso</span></label><div class="tr097-local-grid">${[['inicios','Carreiras iniciadas'],['treinos','Treinos escolhidos'],['jogos','Lances jogados'],['semanas','Avanços no calendário'],['feedbacks','Relatos preparados']].map(([k,t])=>`<div><strong>${Number(stat[k])||0}</strong><span>${t}</span></div>`).join('')}</div><div class="toolrow"><button class="btn btn-sm btn-soft" data-action="tr097-stats">Copiar diagnóstico local</button><button class="btn btn-sm btn-ghost" data-action="tr097-clear-stats">Apagar contagens</button></div><p class="muted small">Este painel **não** mostra quantas pessoas acessaram o site ou quantas voltaram; isso exige medição no servidor e uma política de privacidade apropriada.</p></section>`;
+}
+function quickStep(){if(!S)return'';let title,description,btn,where;
+ if(S.pending){title='Responda ao acontecimento';description='Sua escolha atual aguarda uma resposta antes do próximo período.';btn='Tomar decisão';where='evento';}
+ else if(S.match){title='Você tem uma partida';description='Escolha as ações do seu jogador e descubra os resultados depois.';btn='Jogar partida';where='partida';}
+ else if(['ended','pos'].includes(phase())){title='Reveja sua trajetória';description='Explore suas conquistas, estatísticas e próximos passos.';btn='Abrir memorial';where='memorial';}
+ else if((S.weekTrainCount||0)<5&&S.style!=='Recuperação'){title='Comece pelo treinamento';description=`Você tem ${5-(S.weekTrainCount||0)} vaga(s) de treino neste período. A evolução técnica depende da sua dedicação.`;btn='Escolher treinos';where='treino';}
+ else{title='Avance sua carreira';description='O treino está concluído ou você escolheu recuperação. Avance o calendário para descobrir o que acontece.';btn='Voltar à Central';where='central';}
+ return `<section class="tr097-next card" aria-label="Sugestão de próximo passo"><div><span class="tr097-flag">SEU PRÓXIMO PASSO</span><h3>${esc(title)}</h3><p>${esc(description)}</p></div><div class="tr097-next-buttons"><button class="btn btn-primary" data-action="nav" data-view="${esc(where)}">${esc(btn)} →</button><button class="btn btn-soft" data-action="nav" data-view="beta097">Dar opinião</button></div></section>`;
+}
+function publicFeedback(){return `<div class="tr097-public"><div class="tr097-public-header"><button class="btn btn-soft" data-action="title">← Voltar ao início</button><strong>TRAJETÓRIA · BETA</strong></div><main class="tr097-public-main">${feedbackPanel()}</main></div>`;}
+// Include the option in both desktop sidebar and the existing mobile "Todas as áreas" drawer.
+if(!LINKS.some(([key])=>key==='beta097')){const pos=LINKS.findIndex(([key])=>key==='beta090');LINKS.splice(pos>=0?pos:LINKS.length,0,['beta097','✉','Enviar opinião']);}
+const prevIntro=intro;
+intro=function(){const html=prevIntro();return html.replace(/(<div class="cover-actions">)/,`<p class="tr097-cover-note">Você começa aos 13 anos e constrói a carreira escolhendo treinos, peneiras e decisões em campo. O beta é gratuito e não exige cadastro.</p>$1`).replace(/(<p class="cover-foot">)/,`<p class="tr097-cover-feedback"><button class="btn btn-sm btn-soft" data-action="tr097-open-feedback">✉ Enviar opinião ou relatar problema</button></p>$1`);};
+const prevCentral=central;
+central=function(){const html=prevCentral();if(!S)return html;const id=html.indexOf('<section class="pm08-hub"');return id>=0?html.slice(0,id)+quickStep()+html.slice(id):quickStep()+html;};
+const prevRender=render;
+render=function(){if(view==='beta097'){ROOT.innerHTML=S?frame(feedbackPanel()):publicFeedback();document.title='Trajetória — Enviar opinião · Beta 0.9.7';window.scrollTo?.({top:0,behavior:'instant'});return;}
+ const result=prevRender();document.title='Trajetória — Carreira no futebol · Beta 0.9.7';if(S)S.version=RELEASE;return result;};
+const prevSave=save;
+save=function(){if(!S)return prevSave();const result=prevSave();S.version=RELEASE;const all=loadAll();all[S.id]=S;const ok=storeAll(all);return result!==false&&ok;};
+const prevAction=doAction;
+doAction=function(action,el){
+ if(action==='tr097-open-feedback'){view='beta097';render();return;}
+ if(action==='tr097-github'){track('feedbacks');sendGitHub();return;}
+ if(action==='tr097-copy'){const r=report();if(r){track('feedbacks');storeDraft();copyString(r.body);}return;}
+ if(action==='tr097-share'){track('feedbacks');void share();return;}
+ if(action==='tr097-download'){const r=report();if(r){track('feedbacks');storeDraft();download('feedback-trajetoria-097.txt',r.body);toast('Arquivo preparado. Compartilhe apenas se desejar.');}return;}
+ if(action==='tr097-clear-stats'){safeSet(STATS_KEY,'{}');toast('Contagens locais apagadas.');render();return;}
+ if(action==='tr097-stats'){const o=stats(),items=[`TRAJETÓRIA 0.9.7 — DIAGNÓSTICO LOCAL (não automático)`,...Object.entries(o).map(([k,v])=>`${k}: ${v}`)];copyString(items.join('\n'));return;}
+ if(action==='new')track('criacao_aberta');
+ if(action==='advance'||action==='skip')track('semanas');
+ if(['focus','auto-train','train-last','train-fav'].includes(action))track('treinos');
+ if(['match-choice','match-decision','decision','play-choice','choose-match'].includes(action))track('jogos');
+ return prevAction(action,el);
+};
+const prevCreate=createGame;
+createGame=function(person){const x=prevCreate(person);track('inicios');return x;};
+// Draft only, no remote storage; delegated listener doesn't replace existing game inputs.
+document.addEventListener('input',ev=>{if(view==='beta097'&&['tr097-kind','tr097-rate','tr097-desc','tr097-steps','tr097-details'].includes(ev.target?.id))storeDraft();});
+document.addEventListener('change',ev=>{if(ev.target?.id==='tr097-consent'){safeSet(CONSENT_KEY,ev.target.checked?'yes':'no');render();}else if(view==='beta097'&&['tr097-kind','tr097-rate','tr097-details'].includes(ev.target?.id))storeDraft();});
+window.TRAJ097=Object.freeze({version:RELEASE,feedbackUrl:REPO+'/issues/new',diagnosticsLocalOnly:true,hasFeedbackDraft:()=>!!draft().description,hasConsent:consent});
+if(S)S.version=RELEASE;
+if(ROOT)render();
+})();
+
+</script>
 </body>
 </html>
