@@ -1,9 +1,15 @@
-# Trajetória — Beta 0.9.5
+# Trajetória — Beta 0.9.7
 
-Simulador narrativo de carreira no futebol.
+Simulador narrativo de carreira no futebol. Crie seu personagem aos 13 anos, participe de peneiras, treine atributos, dispute partidas interativas e acompanhe a carreira.
 
-Acesse o jogo pelo endereço da hospedagem Render após a publicação, ou abra `index.html` no Chrome/Edge.
+🎮 **Jogar:** https://trajetoria-beta.onrender.com/
 
-Este é um **beta em desenvolvimento**. O progresso é armazenado no navegador; faça backups pelo menu do jogo. Sem contas online ou sincronização em nuvem.
+## Feedback do beta
+
+Abra **Enviar opinião** na tela inicial ou no menu do jogo. Você poderá avaliar sua experiência, descrever problemas e abrir uma issue no GitHub já preenchida (exige conta), ou copiar/compartilhar o relatório manualmente.
+
+**Privacidade:** sem envio automático de dados pessoais, fotos ou salvamentos. Contadores de uso são opcionais e permanecem exclusivamente no navegador; não representam estatísticas globais de visitantes.
+
+Faça backups das suas carreiras em Configurações. O jogo continua em beta e pode conter bugs.
 
 Produtor: Rogger Rodrigues.
